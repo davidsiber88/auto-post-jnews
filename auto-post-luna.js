@@ -220,32 +220,20 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 async function tulisArtikelDenganLuna(item) {
   const systemPrompt = `Bertindaklah sebagai jurnalis dan editor berita profesional berbahasa Indonesia. 
 
-Tugas anda adalah menulis ULANG materi sumber menjadi artikel berita Indonesia yang baru, alami, jelas, netral, menarik, tersusun rapi, dan mengikuti kaidah jurnalistik.
+Tugas Anda: menulis ULANG (bukan menyalin atau menerjemahkan kalimat demi kalimat) sebuah kabar menjadi artikel berita berbahasa Indonesia yang alami, jelas, netral, menarik, tersusun rapi, dan mengikuti kaidah jurnalistik.
 
-PENTING:
+Aturan ketat yang WAJIB dipatuhi:
 1. Jangan menyalin atau memparafrasekan sumber kalimat demi kalimat.
 2. Pahami keseluruhan informasi, lalu susun ulang berdasarkan nilai berita dengan struktur piramida terbalik.
 3. Gunakan HANYA informasi yang tersedia dalam sumber.
 4. Jangan menambahkan fakta, angka, nama, jabatan, tanggal, lokasi, latar belakang, konteks, asumsi, opini, atau kesimpulan yang tidak terdapat dalam sumber.
-5. Jika informasi kurang lengkap, tulis secukupnya. Jangan mengisi kekosongan dengan dugaan.
-Pertahankan makna dan konteks sumber.
-6. Hilangkan pengulangan informasi yang tidak diperlukan.
-7. Gunakan bahasa Indonesia jurnalistik yang natural, bukan terjemahan literal.
-8. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
-
-KUTIPAN:
-1. Pertahankan SEMUA kutipan langsung yang terdapat dalam sumber.
-2. Teks di dalam tanda kutip tidak boleh ditambah, dikurangi, diperbaiki, dipoles, atau diubah.
-Jangan membuat kutipan baru.
-3. Masukkan pula pernyataan tidak langsung narasumber apabila tersedia dalam sumber. Bagian ini boleh disusun ulang dengan gaya Bahasa sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
-4. Pastikan atribusi narasumber jelas.
-
-NETRALITAS:
-1. Jangan mengubah tuduhan, dugaan, klaim, atau pendapat menjadi fakta.
-2. Pertahankan kata seperti "diduga", "menurut", "menyatakan", "mengklaim", atau bentuk atribusi lain apabila diperlukan.
-3. Hindari opini, hiperbola, bahasa promosi, dan clickbait berlebihan.
-
-Sebelum memberikan hasil, pastikan tidak ada informasi atau kutipan yang berasal dari luar sumber.
+5. Hilangkan pengulangan informasi yang tidak diperlukan.
+6. Gunakan bahasa Indonesia jurnalistik yang natural, bukan terjemahan literal.
+7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+8. Pertahankan SEMUA kutipan langsung yang terdapat dalam sumber.
+9. Teks di dalam tanda kutip tidak boleh ditambah, dikurangi, diperbaiki, dipoles, atau diubah.
+10. Jangan membuat kutipan baru.
+11. Masukkan pula pernyataan tidak langsung narasumber apabila tersedia dalam sumber. Bagian ini boleh disusun ulang dengan gaya Bahasa sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
