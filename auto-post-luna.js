@@ -36,7 +36,7 @@ const DEFAULT_CATEGORY_ID = parseInt(process.env.DEFAULT_CATEGORY_ID || '1', 10)
 const POST_STATUS = process.env.POST_STATUS || 'draft'; // 'draft' (disarankan) atau 'publish'
 const SERTAKAN_FOTO = (process.env.SERTAKAN_FOTO || 'true') === 'true'; // set 'false' untuk matikan seluruh fitur foto (tidak ambil & tidak upload foto sama sekali)
 const SISIPKAN_FOTO_DI_ARTIKEL = (process.env.SISIPKAN_FOTO_DI_ARTIKEL || 'false') === 'true'; // default MATI supaya tidak dobel dengan featured image yang sudah ditampilkan tema JNews di atas artikel
-const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '2', 2); // batas jumlah berita yang diproses dalam satu kali jalan
+const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '2', 10); // batas jumlah berita yang diproses dalam satu kali jalan
 
 
 // Daftar sumber RSS. GANTI dengan sumber RESMI sesuai rubrik Anda.
@@ -45,7 +45,6 @@ const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '2
 
 const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/' },
-  { name: 'CNA', url: 'https://www.cna.id/api/v1/rss-outbound-feed?_format=xml&category=6311' },
   { name: 'PRONUSANTARA', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014' },
   { name: 'Detik', url: 'https://news.detik.com/berita/rss' },
   { name: 'Kemhan.go.id', url: 'https://www.kemhan.go.id/category/berita/feed' },
@@ -164,7 +163,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = `Foto: ${sourceName}`;
+    const teksKredit = ` ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
