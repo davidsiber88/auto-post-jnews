@@ -241,14 +241,14 @@ RINGKASAN: <ringkasan/highlight inti berita dalam SATU paragraf singkat (2-3 kal
 TAG: <PERSIS 4 kata kunci/frasa pendek, dipisah koma, tanpa tanda pagar #, mewakili topik utama artikel (mis. nama tempat, nama instansi, isu, sektor)>
 ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 300-500 kata>`;
 
-  const userPrompt = `Sumber: ${item.sourceName}
+  const userPrompt = `Diolah dari sumber ${item.sourceName}
 Judul asli: ${item.title}
 Ringkasan/isi yang tersedia: ${item.contentSnippet || item.content || '(tidak ada ringkasan tersedia)'}
 Tautan sumber asli: ${item.link}`;
 
   const response = await openai.responses.create({
     model: 'gpt-5.6-luna',
-    reasoning: { effort: 'low' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
+    reasoning: { effort: 'medium' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
     input: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
