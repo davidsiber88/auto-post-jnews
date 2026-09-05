@@ -238,7 +238,7 @@ Aturan ketat yang WAJIB dipatuhi:
    menerka-nerka untuk mengisi kekosongan itu.
 5. Jaga nada netral dan objektif sepanjang artikel; hindari opini pribadi
    atau bahasa yang menghakimi/menyimpulkan sepihak.
-6. Tetap pertahankan nama dari sumber beserta jabatannya (jika ada).
+6. Masukkan pernyataan dari narasumber beserta kutipannya (jika ada).
 7. tambahkan teks "PROBACA.ID - " di awal artikel dan tutup dengan tanda "***" di akhir artikel
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
