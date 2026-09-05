@@ -164,7 +164,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = `Diolah dari sumber: ${sourceName}`;
+    const teksKredit = `sumber ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
@@ -296,7 +296,7 @@ async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto, ri
   }
 
   kontenLengkap += isi;
-  kontenLengkap += `\n<p><em>Sumber: <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
+  kontenLengkap += `\n<p><em>Diolah dari sumber <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
 
   const payload = {
     title: judul,
