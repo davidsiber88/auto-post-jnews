@@ -34,7 +34,10 @@ const WP_APP_PASSWORD = process.env.WP_APP_PASSWORD; // application password (li
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const DEFAULT_CATEGORY_ID = parseInt(process.env.DEFAULT_CATEGORY_ID || '1', 10);
 const POST_STATUS = process.env.POST_STATUS || 'draft'; // 'draft' (disarankan) atau 'publish'
-const SERTAKAN_FOTO = (process.env.SERTAKAN_FOTO || 'true') === 'true'; // set 'false' untuk matikan fitur foto
+const SERTAKAN_FOTO = (process.env.SERTAKAN_FOTO || 'true') === 'true'; // set 'false' untuk matikan seluruh fitur foto (tidak ambil & tidak upload foto sama sekali)
+const SISIPKAN_FOTO_DI_ARTIKEL = (process.env.SISIPKAN_FOTO_DI_ARTIKEL || 'false') === 'true'; // default MATI supaya tidak dobel dengan featured image yang sudah ditampilkan tema JNews di atas artikel
+const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '2', 10); // batas jumlah berita yang diproses dalam satu kali jalan
+
 
 // Daftar sumber RSS. GANTI dengan sumber RESMI sesuai rubrik Anda.
 // Contoh sumber resmi Indonesia yang umum menyediakan RSS/rilis publik:
@@ -44,6 +47,9 @@ const SERTAKAN_FOTO = (process.env.SERTAKAN_FOTO || 'true') === 'true'; // set '
 // - kemkes.go.id, kominfo.go.id, bps.go.id, dsb (cek RSS masing-masing)
 const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/' },
+  { name: 'CNA', url: 'https://www.cna.id/api/v1/rss-outbound-feed?_format=xml&category=10296' },
+  { name: 'Antaranews', url: 'https://www.antaranews.com/rss/rilis-pers.xml' },
+  { name: 'Antaranews', url: 'https://www.antaranews.com/rss/dunia.xml' },
 ];
 
 const LOG_FILE = './posted-log.json'; // penyimpanan sederhana anti-duplikat
