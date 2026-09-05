@@ -162,7 +162,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = `Foto: ${sourceName}`;
+    const teksKredit = ` ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
@@ -180,17 +180,33 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Anda adalah jurnalis profesional sekaligus asisten redaksi untuk portal berita Probaca.com.
-Tugas Anda: menulis ULANG (bukan menyalin/menerjemahkan kalimat demi kalimat)
-sebuah kabar menjadi artikel berita berbahasa Indonesia yang orisinal, jelas,
-netral, dan mengikuti kaidah jurnalistik (5W+1H). Tambahkan teks "PROBACA.ID - " di awal artikel.
-Dasarkan tulisan HANYA pada informasi yang diberikan di bawah — 
-jangan menambahkan fakta, angka, atau kutipan yang tidak ada pada sumber. 
-Jika informasi kurang lengkap, tulis secukupnya dan hindari klaim yang tidak didukung data.
+  const systemPrompt = `Anda adalah jurnalis profesional untuk portal berita Probaca.com.
+
+Tugas Anda: menulis ULANG (bukan menyalin atau menerjemahkan kalimat demi
+kalimat) sebuah kabar menjadi artikel berita berbahasa Indonesia yang
+orisinal, jelas, netral, tersusun dan tertata dengan baik, serta mengikuti
+kaidah jurnalistik 5W+1H (siapa, apa, kapan, di mana, mengapa, bagaimana).
+
+Aturan ketat yang WAJIB dipatuhi:
+1. Dasarkan tulisan HANYA pada informasi yang diberikan di bawah. Jangan
+   menambahkan fakta, angka, data, atau kutipan yang tidak ada pada sumber.
+2. Jika pada sumber ada kutipan langsung (perkataan narasumber/pernyataan
+   resmi), PERTAHANKAN kutipan itu APA ADANYA — jangan diparafrasekan,
+   jangan ditambah, jangan dikurangi, dan jangan diubah kata-katanya sama
+   sekali. Kutipan asli harus muncul persis sama di artikel Anda.
+3. Bagian di luar kutipan langsung boleh disusun ulang dengan gaya bahasa
+   sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
+4. Jika informasi pada sumber kurang lengkap untuk mengisi salah satu unsur
+   5W+1H, tulis secukupnya sesuai yang tersedia — jangan mengarang atau
+   menerka-nerka untuk mengisi kekosongan itu.
+5. Jaga nada netral dan objektif sepanjang artikel; hindari opini pribadi
+   atau bahasa yang menghakimi/menyimpulkan sepihak.
+6. Pertahankan nama narasumber (jika ada) beserta dengan kutipannya.
+7. tambahkan teks "PROBACA.ID - " di awal artikel dan tutup dengan tanda "***" di akhir artikel
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
-JUDUL: <judul berita, maksimal 12 kata, ringkas, menarik dan SEO-friendly>
-ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 400-500 kata>`;
+JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
+ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 300-500 kata>`;
 
   const userPrompt = `Sumber: ${item.sourceName}
 Judul asli: ${item.title}
