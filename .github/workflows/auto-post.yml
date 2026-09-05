@@ -2,7 +2,7 @@ name: Auto Post Berita
 
 on:
   schedule:
-    - cron: '* 3 * * * '   # tiap 30 menit — sesuaikan, lihat C.8 soal kuota
+    - cron: '*/30 * * * *'   # tiap 30 menit — sesuaikan, lihat Bagian C.8 panduan soal kuota
   workflow_dispatch: {}       # supaya bisa dijalankan manual dari tab Actions
 
 permissions:
@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'         # mempercepat proses & menghemat kuota menit
+                                # (butuh package-lock.json ikut ada di repo — lihat Bagian C.3 panduan)
 
       - name: Install dependencies
         run: npm install
@@ -32,8 +33,10 @@ jobs:
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
           DEFAULT_CATEGORY_ID: ${{ secrets.DEFAULT_CATEGORY_ID }}
-          POST_STATUS: publish
+          POST_STATUS: draft
           SERTAKAN_FOTO: 'true'
+          SISIPKAN_FOTO_DI_ARTIKEL: 'false'
+          MAKS_BERITA_PER_PROSES: '2'
 
       - name: Simpan riwayat posting
         run: |
