@@ -48,7 +48,6 @@ const RSS_SOURCES = [
   { name: 'PRONUSANTARA', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014' },
   { name: 'Detik', url: 'https://news.detik.com/berita/rss' },
   { name: 'Kemhan.go.id', url: 'https://www.kemhan.go.id/category/berita/feed' },
-  { name: 'Kemenko PMK', url: 'https://www.kemenkopmk.go.id/rss.xml' },
 ];
 
 const LOG_FILE = './posted-log.json'; // penyimpanan sederhana anti-duplikat
