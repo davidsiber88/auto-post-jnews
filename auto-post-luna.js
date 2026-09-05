@@ -230,7 +230,7 @@ Aturan ketat yang WAJIB dipatuhi:
 3. Masukkan juga pernyataan tidak langsung dalam sumber apabila tersedia. Bagian ini boleh disusun ulang dengan gaya Bahasa sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
 4. Jangan membuat kutipan baru.
 5. Jika informasi kurang lengkap, tulis secukupnya. 
-5. Jaga nada netral dan objektif sepanjang artikel; hindari opini pribadi atau bahasa yang menghakimi/menyimpulkan sepihak.
+5. Jaga nada netral dan objektif sepanjang artikel, hindari opini pribadi atau bahasa yang menghakimi/menyimpulkan sepihak ataupun memberikan kesimpulan di akhir artikel yang tidak ada keterangannya dalam sumber.
 8. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
@@ -246,7 +246,7 @@ Tautan sumber asli: ${item.link}`;
 
   const response = await openai.responses.create({
     model: 'gpt-5.6-luna',
-    reasoning: { effort: 'medium' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
+    reasoning: { effort: 'low' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
     input: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
