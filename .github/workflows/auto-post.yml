@@ -37,6 +37,8 @@ jobs:
           SERTAKAN_FOTO: 'true'
           SISIPKAN_FOTO_DI_ARTIKEL: 'false'
           MAKS_BERITA_PER_PROSES: '1'
+          SERTAKAN_RINGKASAN: 'true'
+          SERTAKAN_TAG_OTOMATIS: 'true'
 
       - name: Simpan riwayat posting
         run: |
