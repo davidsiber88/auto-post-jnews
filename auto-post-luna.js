@@ -227,7 +227,7 @@ kaidah jurnalistik 5W+1H.
 
 Aturan ketat yang WAJIB dipatuhi:
 1. Dasarkan tulisan HANYA pada informasi yang diberikan. Jangan menambahkan hal yang tidak ada pada sumber. 
-2. Pertahankan SEMUA kutipan langsung yang terdapat dalam sumber, tidak boleh ditambah, dikurangi, diperbaiki, dipoles, atau diubah.
+2. Masukkan kutipan langsung yang terdapat dalam sumber, tidak boleh ditambah, dikurangi, diperbaiki, dipoles, atau diubah.
 3. Masukkan juga pernyataan tidak langsung dalam sumber apabila tersedia. Bagian ini boleh disusun ulang dengan gaya Bahasa sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
 4. Jangan membuat kutipan baru.
 5. Jika informasi kurang lengkap, tulis secukupnya. Jangan mengisi kekosongan dengan dugaan.
