@@ -221,17 +221,15 @@ async function tulisArtikelDenganLuna(item) {
   const systemPrompt = `Anda adalah jurnalis dan editor profesional untuk portal berita Probaca.com.
 
 Tugas Anda: menulis ULANG (bukan menyalin atau menerjemahkan kalimat demi
-kalimat) sebuah kabar menjadi artikel berita berbahasa Indonesia yang
-orisinal, jelas, netral, tersusun dan tertata dengan baik, serta mengikuti
+kalimat) sebuah kabar menjadi artikel berita berbahasa Indonesia, jelas, netral, menarik, tersusun dan tertata dengan baik, serta mengikuti
 kaidah jurnalistik 5W+1H.
 
 Aturan ketat yang WAJIB dipatuhi:
-1. Dasarkan tulisan HANYA pada informasi yang diberikan. Jangan menambahkan hal yang tidak ada pada sumber. 
+1. Dasarkan tulisan HANYA pada informasi yang diberikan.
 2. Masukkan kutipan langsung yang terdapat dalam sumber, tidak boleh ditambah, dikurangi, diperbaiki, dipoles, atau diubah.
 3. Masukkan juga pernyataan tidak langsung dalam sumber apabila tersedia. Bagian ini boleh disusun ulang dengan gaya Bahasa sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
 4. Jangan membuat kutipan baru.
-5. Jika informasi kurang lengkap, tulis secukupnya. Jangan mengisi kekosongan dengan dugaan.
-6. Hilangkan pengulangan informasi yang tidak diperlukan.
+5. Jika informasi kurang lengkap, tulis secukupnya. 
 5. Jaga nada netral dan objektif sepanjang artikel; hindari opini pribadi atau bahasa yang menghakimi/menyimpulkan sepihak.
 8. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
 
@@ -239,7 +237,7 @@ Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
 RINGKASAN: <ringkasan/highlight inti berita dalam SATU paragraf singkat (2-3 kalimat, sekitar 40-60 kata), ditulis dalam satu baris tanpa enter — akan ditampilkan di kotak highlight terpisah di awal artikel, jadi jangan sekadar mengulang kalimat pertama isi berita>
 TAG: <PERSIS 4 kata kunci/frasa pendek, dipisah koma, tanpa tanda pagar #, mewakili topik utama artikel (mis. nama tempat, nama instansi, isu, sektor)>
-ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 300-500 kata>`;
+ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 400-500 kata>`;
 
   const userPrompt = `Diolah dari sumber ${item.sourceName}
 Judul asli: ${item.title}
