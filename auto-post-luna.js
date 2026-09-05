@@ -37,6 +37,8 @@ const POST_STATUS = process.env.POST_STATUS || 'draft'; // 'draft' (disarankan) 
 const SERTAKAN_FOTO = (process.env.SERTAKAN_FOTO || 'true') === 'true'; // set 'false' untuk matikan seluruh fitur foto (tidak ambil & tidak upload foto sama sekali)
 const SISIPKAN_FOTO_DI_ARTIKEL = (process.env.SISIPKAN_FOTO_DI_ARTIKEL || 'false') === 'true'; // default MATI supaya tidak dobel dengan featured image yang sudah ditampilkan tema JNews di atas artikel
 const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '1', 10); // batas jumlah berita yang diproses dalam satu kali jalan
+const SERTAKAN_RINGKASAN = (process.env.SERTAKAN_RINGKASAN || 'true') === 'true'; // tampilkan kotak ringkasan/highlight di awal artikel
+const SERTAKAN_TAG_OTOMATIS = (process.env.SERTAKAN_TAG_OTOMATIS || 'true') === 'true'; // isi 4 tag WordPress secara otomatis
 
 
 // Daftar sumber RSS. GANTI dengan sumber RESMI sesuai rubrik Anda.
@@ -162,7 +164,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = ` ${sourceName}`;
+    const teksKredit = `/Gambar: ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
@@ -177,6 +179,42 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     console.error('Gagal mengunggah foto:', err.response?.data || err.message);
     return null;
   }
+}
+
+/**
+ * Mencari ID tag WordPress berdasarkan nama; kalau belum ada, membuat tag
+ * baru. Mengembalikan ID (number) atau null kalau gagal.
+ */
+async function dapatkanIdTag(namaTag) {
+  const auth = Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString('base64');
+  try {
+    const cari = await axios.get(`${WP_URL}/wp-json/wp/v2/tags`, {
+      params: { search: namaTag, per_page: 100 },
+      headers: { Authorization: `Basic ${auth}` },
+    });
+    const cocok = cari.data.find((t) => t.name.toLowerCase() === namaTag.toLowerCase());
+    if (cocok) return cocok.id;
+
+    const buat = await axios.post(
+      `${WP_URL}/wp-json/wp/v2/tags`,
+      { name: namaTag },
+      { headers: { Authorization: `Basic ${auth}`, 'Content-Type': 'application/json' } }
+    );
+    return buat.data.id;
+  } catch (err) {
+    console.error(`Gagal memproses tag "${namaTag}":`, err.response?.data || err.message);
+    return null;
+  }
+}
+
+/** Memanggil dapatkanIdTag() untuk beberapa nama tag sekaligus. */
+async function dapatkanIdTagBanyak(daftarNamaTag) {
+  const ids = [];
+  for (const nama of daftarNamaTag) {
+    const id = await dapatkanIdTag(nama);
+    if (id) ids.push(id);
+  }
+  return ids;
 }
 
 async function tulisArtikelDenganLuna(item) {
@@ -206,6 +244,8 @@ Aturan ketat yang WAJIB dipatuhi:
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
+RINGKASAN: <ringkasan/highlight inti berita dalam SATU paragraf singkat (2-3 kalimat, sekitar 40-60 kata), ditulis dalam satu baris tanpa enter — akan ditampilkan di kotak highlight terpisah di awal artikel, jadi jangan sekadar mengulang kalimat pertama isi berita>
+TAG: <PERSIS 4 kata kunci/frasa pendek, dipisah koma, tanpa tanda pagar #, mewakili topik utama artikel (mis. nama tempat, nama instansi, isu, sektor)>
 ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 300-500 kata>`;
 
   const userPrompt = `Sumber: ${item.sourceName}
@@ -224,31 +264,47 @@ Tautan sumber asli: ${item.link}`;
 
   const text = response.output_text || '';
   const judulMatch = text.match(/JUDUL:\s*(.+)/);
+  const ringkasanMatch = text.match(/RINGKASAN:\s*(.+)/);
+  const tagMatch = text.match(/TAG:\s*(.+)/);
   const isiMatch = text.match(/ISI:\s*([\s\S]+)/);
+
+  const tags = tagMatch
+    ? tagMatch[1].split(',').map((t) => t.trim()).filter(Boolean).slice(0, 4)
+    : [];
 
   return {
     judul: judulMatch ? judulMatch[1].trim() : item.title,
+    ringkasan: ringkasanMatch ? ringkasanMatch[1].trim() : '',
+    tags,
     isi: isiMatch ? isiMatch[1].trim() : `<p>${text.trim()}</p>`,
   };
 }
 
-async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto }) {
+async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto, ringkasan, tagIds }) {
   const auth = Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString('base64');
 
-  let kontenLengkap = isi;
+  let kontenLengkap = '';
 
-  // Kalau upload featured image gagal/tidak ada, sisipkan foto langsung
-  // di badan artikel sebagai cadangan supaya kredit foto tetap tampil.
   // Foto sudah ditampilkan lewat featured_media (diatur JNews otomatis di atas
   // artikel). Sisipan <figure> berikut ini OPSIONAL, dimatikan secara default,
   // supaya foto tidak muncul dua kali. Aktifkan lewat SISIPKAN_FOTO_DI_ARTIKEL=true
   // di .env kalau tema/tampilan Anda ternyata TIDAK menampilkan featured image
   // secara otomatis.
   if (SISIPKAN_FOTO_DI_ARTIKEL && foto && foto.sourceUrlWp) {
-    const figur = `<figure class="wp-block-image"><img src="${foto.sourceUrlWp}" alt="Foto: ${sourceName}" /><figcaption>Foto: ${sourceName}</figcaption></figure>\n`;
-    kontenLengkap = figur + kontenLengkap;
+    kontenLengkap += `<figure class="wp-block-image"><img src="${foto.sourceUrlWp}" alt="Foto: ${sourceName}" /><figcaption>Foto: ${sourceName}</figcaption></figure>\n`;
   }
 
+  // Kotak ringkasan/highlight di awal artikel, sebelum isi berita.
+  // Styling ditulis inline (bukan bergantung pada class tema tertentu) supaya
+  // tetap tampil rapi di JNews versi apa pun. Sesuaikan warna/gaya sesukanya.
+  if (SERTAKAN_RINGKASAN && ringkasan) {
+    kontenLengkap += `<div class="ringkasan-berita" style="background:#f6f6f6;border-left:4px solid #c0392b;padding:14px 18px;margin:0 0 22px;font-size:1.05em;line-height:1.5;">
+  <strong style="display:block;margin-bottom:6px;text-transform:uppercase;font-size:0.8em;letter-spacing:0.05em;color:#c0392b;">Ringkasan</strong>
+  ${ringkasan}
+</div>\n`;
+  }
+
+  kontenLengkap += isi;
   kontenLengkap += `\n<p><em>Sumber: <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
 
   const payload = {
@@ -259,6 +315,12 @@ async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto }) 
   };
   if (foto && foto.mediaId) {
     payload.featured_media = foto.mediaId;
+  }
+  if (SERTAKAN_RINGKASAN && ringkasan) {
+    payload.excerpt = ringkasan; // ikut mengisi excerpt WordPress (dipakai JNews di listing/arsip & meta SEO)
+  }
+  if (SERTAKAN_TAG_OTOMATIS && tagIds && tagIds.length) {
+    payload.tags = tagIds;
   }
 
   const res = await axios.post(`${WP_URL}/wp-json/wp/v2/posts`, payload, {
@@ -297,14 +359,21 @@ async function main() {
         }
       }
 
+      let tagIds = [];
+      if (SERTAKAN_TAG_OTOMATIS && artikel.tags && artikel.tags.length) {
+        tagIds = await dapatkanIdTagBanyak(artikel.tags);
+      }
+
       const hasil = await postingKeWordPress({
         judul: artikel.judul,
         isi: artikel.isi,
         sourceLink: item.link,
         sourceName: item.sourceName,
         foto,
+        ringkasan: artikel.ringkasan,
+        tagIds,
       });
-      console.log(`Berhasil dibuat sebagai "${POST_STATUS}" -> ID: ${hasil.id}${foto ? ' (dengan foto + kredit)' : ''}`);
+      console.log(`Berhasil dibuat sebagai "${POST_STATUS}" -> ID: ${hasil.id}${foto ? ' (dengan foto + kredit)' : ''}${tagIds.length ? ` (${tagIds.length} tag)` : ''}`);
       savePostedLink(item.link);
     } catch (err) {
       console.error(`Gagal memproses "${item.title}":`, err.response?.data || err.message);
@@ -318,3 +387,4 @@ main().catch((err) => {
   console.error('Terjadi error fatal:', err);
   process.exit(1);
 });
+
