@@ -45,7 +45,6 @@ const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '2
 
 const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/' },
-  { name: 'CNA', url: 'https://www.cna.id/api/v1/rss-outbound-feed?_format=xml&category=10296' },
   { name: 'CNA', url: 'https://www.cna.id/api/v1/rss-outbound-feed?_format=xml&category=6311' },
   { name: 'PRONUSANTARA', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014' },
   { name: 'Kemenkes', url: 'https://kemkes.go.id/id/rss/article/rilis-berita' },
