@@ -47,8 +47,8 @@ const SERTAKAN_TAG_OTOMATIS = (process.env.SERTAKAN_TAG_OTOMATIS || 'true') === 
 
 const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/' },
-  { name: 'PRONUSANTARA', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014' },
-  { name: 'Detik', url: 'https://news.detik.com/berita/rss' },
+  { name: 'Pronusantara.com', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014' },
+  { name: 'Detik.com', url: 'https://news.detik.com/berita/rss' },
   { name: 'Kemhan.go.id', url: 'https://www.kemhan.go.id/category/berita/feed' },
 ];
 
@@ -164,7 +164,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = `/Gambar: ${sourceName}`;
+    const teksKredit = ' ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
