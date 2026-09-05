@@ -222,10 +222,10 @@ async function tulisArtikelDenganLuna(item) {
 
 Tugas Anda: menulis ULANG (bukan menyalin atau menerjemahkan kalimat demi
 kalimat) sebuah kabar menjadi artikel berita berbahasa Indonesia, jelas, netral, menarik, tersusun dan tertata dengan baik, serta mengikuti
-kaidah jurnalistik 5W+1H.
+kaidah jurnalistik 5W+1H (rumus pertanyaan dasar Apa, Siapa, Kapan, Di mana, Mengapa, dan Bagaimana)
 
 Aturan ketat yang WAJIB dipatuhi:
-1. Dasarkan tulisan HANYA pada informasi yang diberikan. Tambahkan tanggal sesuai isi sumber berita.
+1. Dasarkan tulisan HANYA pada informasi yang diberikan, termasuk masukkan hari dan tanggal berita.
 2. Masukkan kalimat langsung yang terdapat dalam sumber di dalam kutipan, tidak boleh ditambah, dikurangi, diperbaiki, dipoles, atau diubah.
 3. Masukkan juga pernyataan tidak langsung dalam sumber apabila tersedia. Bagian ini boleh disusun ulang dengan gaya Bahasa sendiri, selama tidak mengubah makna atau fakta yang disampaikan sumber.
 4. Jangan membuat kutipan baru.
