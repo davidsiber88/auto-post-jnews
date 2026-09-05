@@ -42,14 +42,10 @@ const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '2
 // Daftar sumber RSS. GANTI dengan sumber RESMI sesuai rubrik Anda.
 // Contoh sumber resmi Indonesia yang umum menyediakan RSS/rilis publik:
 // - setkab.go.id (Sekretariat Kabinet)
-// - bnpb.go.id (info kebencanaan)
-// - bmkg.go.id (cuaca/gempa)
-// - kemkes.go.id, kominfo.go.id, bps.go.id, dsb (cek RSS masing-masing)
+
 const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/' },
   { name: 'CNA', url: 'https://www.cna.id/api/v1/rss-outbound-feed?_format=xml&category=10296' },
-  { name: 'Antaranews', url: 'https://www.antaranews.com/rss/rilis-pers.xml' },
-  { name: 'Antaranews', url: 'https://www.antaranews.com/rss/dunia.xml' },
 ];
 
 const LOG_FILE = './posted-log.json'; // penyimpanan sederhana anti-duplikat
