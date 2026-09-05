@@ -162,7 +162,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = ` ${sourceName}`;
+    const teksKredit = `Foto: ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
@@ -190,7 +190,7 @@ Jika informasi kurang lengkap, tulis secukupnya dan hindari klaim yang tidak did
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas, menarik dan SEO-friendly>
-ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 300-500 kata>`;
+ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 400-500 kata>`;
 
   const userPrompt = `Sumber: ${item.sourceName}
 Judul asli: ${item.title}
@@ -256,8 +256,15 @@ async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto }) 
 
 async function main() {
   console.log('Mengecek sumber berita baru...');
-  const items = await fetchNewItems();
-  console.log(`Ditemukan ${items.length} item baru.`);
+  const semuaItemBaru = await fetchNewItems();
+  console.log(`Ditemukan ${semuaItemBaru.length} item baru total.`);
+
+  const items = semuaItemBaru.slice(0, MAKS_BERITA_PER_PROSES);
+  if (semuaItemBaru.length > items.length) {
+    console.log(`Memproses ${items.length} item dulu (batas MAKS_BERITA_PER_PROSES=${MAKS_BERITA_PER_PROSES}). Sisanya ${semuaItemBaru.length - items.length} item akan diproses di jadwal berikutnya.`);
+  } else {
+    console.log(`Memproses ${items.length} item.`);
+  }
 
   for (const item of items) {
     try {
