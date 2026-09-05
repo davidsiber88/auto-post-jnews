@@ -36,7 +36,7 @@ jobs:
           POST_STATUS: publish
           SERTAKAN_FOTO: 'true'
           SISIPKAN_FOTO_DI_ARTIKEL: 'false'
-          MAKS_BERITA_PER_PROSES: '2'
+          MAKS_BERITA_PER_PROSES: '1'
 
       - name: Simpan riwayat posting
         run: |
