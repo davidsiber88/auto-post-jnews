@@ -164,7 +164,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = ' ${sourceName}`;
+    const teksKredit = 'Sumber ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
