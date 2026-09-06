@@ -2,7 +2,7 @@ name: Auto Post Berita
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # tiap 30 menit — sesuaikan, lihat Bagian C.8 panduan soal kuota
+    - cron: '*/60 * * * *'   # tiap 30 menit — sesuaikan, lihat Bagian C.8 panduan soal kuota
   workflow_dispatch: {}       # supaya bisa dijalankan manual dari tab Actions
 
 permissions:
