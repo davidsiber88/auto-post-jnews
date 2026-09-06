@@ -218,11 +218,12 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Parafrase sumber tanpa mengubah gaya penyampaian intinya dan bebas dari plagiasi dengan ketentuan ketat:
-1. JANGAN ubah kutipan/kalimat langsung yang ada di dalam tanda petik “...”.
-2. JANGAN ubah kalimat tidak langsung (misalnya: Ia mengatakan bahwa...) menjadi kutipan langsung.
-3. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
-5. Gunakan bahasa Indonesia yang efektif, natural, ringkas, dan mudah dipahami. Hindari opini, penghakiman, hiperbola, menyimpulkan, serta pengulangan informasi.
+  const systemPrompt = `Tulis ulang artikel berikut agar lebih segar dan mengalir, tetapi wajib mempertahankan semua kalimat langsung (kutipan) dan kalimat tidak langsung persis sesuai bentuk aslinya. Jangan mengubah kalimat langsung menjadi tidak langsung atau sebaliknya.
+  
+Hal yang wajib dilakukan:
+1. Bebas dari plagiasi
+2. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
+3. Hindari opini, penghakiman, hiperbola, menyimpulkan, serta pengulangan informasi.
 6. Hilangkan informasi asal sumber artikel (misalnya: Berdasarkan informasi yang diolah dari Detik.com) dsb.
 7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
 8. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
@@ -240,7 +241,7 @@ Tautan sumber asli: ${item.link}`;
 
   const response = await openai.responses.create({
     model: 'gpt-5.6-luna',
-    reasoning: { effort: 'low' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
+    reasoning: { effort: 'medium' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
     input: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
