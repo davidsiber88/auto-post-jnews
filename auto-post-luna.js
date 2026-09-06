@@ -233,6 +233,8 @@ async function tulisArtikelDenganLuna(item) {
   8. Untuk korban, anak, kekerasan seksual, atau kelompok rentan, lindungi identitas sesuai etika jurnalistik dan hindari uraian yang eksploitatif.
   9. Jangan mengisi kekurangan informasi dengan asumsi.
   10. Jangan menampilkan proses berpikir atau penjelasan mengenai cara Anda menulis artikel. Tampilkan hanya hasil akhirnya.
+  11. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+  12. Tambahkan juga teks "Disclaimer: Sebagian proses pengolahan artikel dari sumber yang disebutkan dibantu oleh teknologi (AI). Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer." di akhir artikel di bawah tanda "***".
 
 Berikan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
