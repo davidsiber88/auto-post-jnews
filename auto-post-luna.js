@@ -26,6 +26,7 @@ const axios = require('axios');
 const Parser = require('rss-parser');
 const OpenAI = require('openai');
 const fs = require('fs');
+const cheerio = require('cheerio');
 
 // ---------- KONFIGURASI ----------
 const WP_URL = process.env.WP_URL; // contoh: https://probaca.com
@@ -39,17 +40,24 @@ const SISIPKAN_FOTO_DI_ARTIKEL = (process.env.SISIPKAN_FOTO_DI_ARTIKEL || 'false
 const MAKS_BERITA_PER_PROSES = parseInt(process.env.MAKS_BERITA_PER_PROSES || '1', 10); // batas jumlah berita yang diproses dalam satu kali jalan
 const SERTAKAN_RINGKASAN = (process.env.SERTAKAN_RINGKASAN || 'true') === 'true'; // tampilkan kotak ringkasan/highlight di awal artikel
 const SERTAKAN_TAG_OTOMATIS = (process.env.SERTAKAN_TAG_OTOMATIS || 'true') === 'true'; // isi 4 tag WordPress secara otomatis
-
+const AMBIL_ARTIKEL_LENGKAP = (process.env.AMBIL_ARTIKEL_LENGKAP || 'true') === 'true'; // ambil teks lengkap halaman sumber (bukan cuma cuplikan RSS) supaya kutipan tidak hilang
 
 // Daftar sumber RSS. GANTI dengan sumber RESMI sesuai rubrik Anda.
 // Contoh sumber resmi Indonesia yang umum menyediakan RSS/rilis publik:
 // - setkab.go.id (Sekretariat Kabinet)
-
+// - bnpb.go.id (info kebencanaan)
+// - bmkg.go.id (cuaca/gempa)
+// - kemkes.go.id, kominfo.go.id, bps.go.id, dsb (cek RSS masing-masing)
+//
+// Field "selector" OPSIONAL: CSS selector kontainer isi artikel di halaman
+// sumber (mis. '.entry-content', '.post-content', '.detail-konten'). Isi
+// kalau Anda tahu strukturnya supaya ekstraksi lebih akurat; kalau dikosongkan,
+// skrip mencoba beberapa selector umum lalu fallback ke gabungan semua <p>.
 const RSS_SOURCES = [
-  { name: 'Setkab RI', url: 'https://setkab.go.id/feed/' },
-  { name: 'Pronusantara.com', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014' },
-  { name: 'Detik.com', url: 'https://news.detik.com/berita/rss' },
-  { name: 'Kemhan.go.id', url: 'https://www.kemhan.go.id/category/berita/feed' },
+  { name: 'Setkab RI', url: 'https://setkab.go.id/feed/', selector: '.entry-content' },
+  { name: 'Pronusantara.com', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014', selector: '.entry-content' },
+  { name: 'Detik.com', url: 'https://news.detik.com/berita/rss', selector: '.entry-content' },
+  { name: 'Kemhan.go.id', url: 'https://www.kemhan.go.id/category/berita/feed', selector: '.entry-content' },
 ];
 
 const LOG_FILE = './posted-log.json'; // penyimpanan sederhana anti-duplikat
@@ -91,7 +99,7 @@ async function fetchNewItems() {
       const feed = await parser.parseURL(source.url);
       for (const item of feed.items) {
         if (item.link && !posted.includes(item.link)) {
-          newItems.push({ ...item, sourceName: source.name });
+          newItems.push({ ...item, sourceName: source.name, sourceSelector: source.selector });
         }
       }
     } catch (err) {
@@ -164,7 +172,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
     });
 
     const mediaId = unggah.data.id;
-    const teksKredit = `sumber ${sourceName}`;
+    const teksKredit = `Sumber ${sourceName}`;
 
     // Tandai caption & alt text supaya kredit foto ikut tampil
     // (JNews umumnya menampilkan caption media di bawah featured image).
@@ -217,31 +225,99 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
   return ids;
 }
 
+/**
+ * Mengambil teks artikel LENGKAP dari halaman sumber (bukan cuma cuplikan
+ * RSS yang sering terpotong/tanpa kutipan). Mencoba selector kustom dulu
+ * (kalau diisi di RSS_SOURCES), lalu beberapa selector umum, lalu fallback
+ * ke gabungan semua tag <p> di halaman. Mengembalikan null kalau gagal —
+ * pemanggilnya lalu jatuh balik memakai cuplikan RSS seperti biasa.
+ */
+async function ambilTeksArtikelLengkap(url, selectorKustom) {
+  try {
+    const res = await axios.get(url, {
+      timeout: 15000,
+      headers: { 'User-Agent': 'Mozilla/5.0 (auto-post-jnews bot)' },
+    });
+    const $ = cheerio.load(res.data);
+
+    const daftarSelector = [selectorKustom, '.entry-content', '.post-content', '.detail-konten', '.content-detail', 'article'].filter(Boolean);
+    for (const sel of daftarSelector) {
+      const teks = $(sel).first().text().replace(/\s+/g, ' ').trim();
+      if (teks && teks.length > 200) return teks.slice(0, 6000); // batasi panjang supaya hemat token
+    }
+
+    // Fallback terakhir: gabungkan semua paragraf di halaman.
+    const gabunganParagraf = $('p').map((_, el) => $(el).text().trim()).get().filter(Boolean).join('\n');
+    return gabunganParagraf ? gabunganParagraf.slice(0, 6000) : null;
+  } catch (err) {
+    console.warn(`  Gagal mengambil artikel lengkap dari ${url}: ${err.message} — memakai cuplikan RSS saja.`);
+    return null;
+  }
+}
+
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Tulis ulang artikel sesuai dengan aslinya, dan wajib mempertahankan semua kalimat langsung (kutipan) dan kalimat tidak langsung persis sesuai bentuk aslinya. Jangan mengubah kalimat langsung menjadi tidak langsung atau sebaliknya.
-  
-Hal yang wajib dilakukan:
-1. Bebas dari plagiasi
-2. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
-3. Hindari opini, penghakiman, hiperbola, menyimpulkan, serta pengulangan informasi.
-6. Hilangkan informasi asal sumber artikel (misalnya: Berdasarkan informasi yang diolah dari Detik.com) dsb.
+  const systemPrompt = `Anda adalah jurnalis profesional untuk portal berita Probaca.com.
+
+Tugas Anda: menyusun ULANG sebuah berita dari sumber resmi menjadi artikel
+jurnalistik berbahasa Indonesia yang MENGALIR NATURAL dan enak dibaca —
+seperti tulisan wartawan sungguhan, bukan ringkasan generik yang terasa
+hambar. Ini BUKAN permintaan menyalin/menerjemahkan kalimat demi kalimat
+secara identik, TAPI JUGA BUKAN permintaan menulis ulang besar-besaran
+sampai mengubah seluruh struktur dan nuansa berita. Yang diinginkan adalah
+PARAFRASE MINIMAL: ubah SECUKUPNYA saja (susunan kalimat, kata sambung,
+urutan informasi) supaya tidak identik kata demi kata dengan sumber, tanpa
+mengorbankan kelengkapan detail, kutipan, dan "rasa" berita aslinya.
+
+Aturan ketat yang WAJIB dipatuhi:
+1. PERTAHANKAN seluruh kutipan LANGSUNG (perkataan narasumber dalam tanda
+   kutip) PERSIS SAMA kata-katanya — jangan diparafrasekan, ditambah,
+   dikurangi, atau diubah sama sekali. Ini termasuk aturan paling penting.
+2. PERTAHANKAN juga substansi kutipan TIDAK LANGSUNG (mis. "menurut ...",
+   "... menjelaskan bahwa ...", "... menyatakan ..."). Redaksi kalimatnya
+   boleh disusun ulang secukupnya, tapi seluruh informasi & atribusinya
+   (siapa yang menyatakan apa) harus tetap ada, jangan sampai hilang atau
+   dilebur jadi kalimat umum tanpa atribusi.
+3. Pertahankan detail konkret dari sumber: angka, nama, lokasi, waktu,
+   jabatan, nama instansi. Detail semacam ini yang membuat berita terasa
+   spesifik dan nyata — JANGAN diringkas jadi kalimat umum yang kehilangan
+   detail tersebut, karena hasilnya akan terasa hambar dan tidak jurnalistik.
+4. Dasarkan tulisan HANYA pada informasi yang diberikan di bawah. Jangan
+   menambahkan fakta, angka, data, atau kutipan yang tidak ada pada sumber.
+5. Jika informasi pada sumber kurang lengkap untuk mengisi salah satu unsur
+   5W+1H (siapa, apa, kapan, di mana, mengapa, bagaimana), tulis secukupnya
+   sesuai yang tersedia — jangan mengarang atau menerka-nerka.
+6. Jaga nada netral dan objektif; hindari opini pribadi atau bahasa yang
+   menghakimi/menyimpulkan sepihak.
 7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
 8. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
 
-Berikan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
+Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
 RINGKASAN: <ringkasan/highlight inti berita dalam SATU paragraf singkat (2-3 kalimat, sekitar 40-60 kata), ditulis dalam satu baris tanpa enter — akan ditampilkan di kotak highlight terpisah di awal artikel, jadi jangan sekadar mengulang kalimat pertama isi berita>
 TAG: <PERSIS 4 kata kunci/frasa pendek, dipisah koma, tanpa tanda pagar #, mewakili topik utama artikel (mis. nama tempat, nama instansi, isu, sektor)>
-ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, 400-500 kata>`;
+ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, panjangnya MENYESUAIKAN panjang materi sumber — jangan dipangkas drastis kalau sumbernya memang panjang dan detail>`;
+
+// Coba ambil teks LENGKAP dari halaman sumber dulu (bukan cuma cuplikan
+  // RSS yang sering terpotong tanpa kutipan). Kalau gagal/dimatikan, jatuh
+  // balik memakai content/contentSnippet dari feed seperti biasa.
+  let materiSumber = null;
+  if (AMBIL_ARTIKEL_LENGKAP) {
+    materiSumber = await ambilTeksArtikelLengkap(item.link, item.sourceSelector);
+  }
+  if (!materiSumber) {
+    materiSumber = item.content || item.contentSnippet || '(tidak ada ringkasan tersedia)';
+  }
 
   const userPrompt = `Diolah dari sumber ${item.sourceName}
 Judul asli: ${item.title}
-Ringkasan/isi yang tersedia: ${item.contentSnippet || item.content || '(tidak ada ringkasan tersedia)'}
+Materi sumber:
+${materiSumber}
+
 Tautan sumber asli: ${item.link}`;
 
   const response = await openai.responses.create({
     model: 'gpt-5.6-luna',
-    reasoning: { effort: 'medium' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
+    reasoning: { effort: 'low' }, // cukup untuk tugas rewrite/ringkas; lihat panduan Bagian 2.4
     input: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
@@ -291,7 +367,7 @@ async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto, ri
   }
 
   kontenLengkap += isi;
-  kontenLengkap += `\n<p><em>Diolah dari sumber <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
+  kontenLengkap += `\n<p><em>Sumber: <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
 
   const payload = {
     title: judul,
