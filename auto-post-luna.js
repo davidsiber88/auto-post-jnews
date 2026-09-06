@@ -288,7 +288,7 @@ ISI: <isi berita dalam HTML sederhana, gunakan tag <p> per paragraf, panjangnya 
     materiSumber = item.content || item.contentSnippet || '(tidak ada ringkasan tersedia)';
   }
 
-  const userPrompt = `Diolah dari sumber ${item.sourceName}
+  const userPrompt = `Sumber: ${item.sourceName}
 Judul asli: ${item.title}
 Materi sumber:
 ${materiSumber}
@@ -347,7 +347,7 @@ async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto, ri
   }
 
   kontenLengkap += isi;
-  kontenLengkap += `\n<p><em>Sumber: <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
+  kontenLengkap += `\n<p><em>Diolah dari sumber <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
 
   const payload = {
     title: judul,
