@@ -218,7 +218,7 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Tulis ulang artikel berikut agar lebih segar dan mengalir, tetapi wajib mempertahankan semua kalimat langsung (kutipan) dan kalimat tidak langsung persis sesuai bentuk aslinya. Jangan mengubah kalimat langsung menjadi tidak langsung atau sebaliknya.
+  const systemPrompt = `Tulis ulang artikel sesuai dengan aslinya, dan wajib mempertahankan semua kalimat langsung (kutipan) dan kalimat tidak langsung persis sesuai bentuk aslinya. Jangan mengubah kalimat langsung menjadi tidak langsung atau sebaliknya.
   
 Hal yang wajib dilakukan:
 1. Bebas dari plagiasi
