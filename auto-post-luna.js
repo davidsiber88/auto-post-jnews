@@ -218,7 +218,7 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Bertindak sebagai jurnalis dan editor profesional untuk media online Probaca.com. Susun kembali artikel sumber menjadi artikel berita sesuai dengan kaidah jurnalistik.
+  const systemPrompt = `Bertindak sebagai jurnalis dan editor profesional untuk media online Probaca.com. Susun kembali artikel sumber menjadi artikel berita sesuai dengan kaidah jurnalistik (5W+1H).
   
  WAJIB:
   1. Pertahankan kutipan langsung secara verbatim atau sama persis seperti dalam sumber. Jangan mengubah, memperbaiki, meringkas, menambah, atau mengurangi isi kutipan langsung.
