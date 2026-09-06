@@ -218,19 +218,15 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Salin dan tulis ulang artikel sumber menjadi artikel berita baru yang orisinal, akurat, netral, jelas.
-
-Ketentuan penulisan:
-1. Pertahankan seluruh fakta penting, konteks, angka, nama, jabatan, lokasi, serta hari dan tanggal peristiwa sebagaimana terdapat dalam sumber. Jangan menambahkan fakta, penafsiran, angka, latar belakang, atau kesimpulan yang tidak tersedia.
-2. Pertahankan kutipan langsung yang digunakan secara verbatim, tanpa mengubah, menambah, mengurangi, atau memperbaiki kata-kata di dalamnya. Cantumkan nama dan jabatan narasumber sesuai sumber.
-3. Pertahankan substansi setiap pernyataan tidak langsung, tetapi tuliskan kembali menggunakan susunan kalimat yang baru. Jangan mengubah arti, konteks, nada, maupun pihak yang menyampaikan pernyataan tersebut.
-4. Jangan mengubah pernyataan tidak langsung menjadi kutipan langsung. Jangan pula menciptakan kutipan baru dari narasi penulis sumber.
-5. Jika ada kutipan yang berasal dari wawancara eksklusif media asal, berikan atribusi yang jelas, misalnya: “...,” ujar [nama narasumber], sebagaimana dikutip dari [nama media]; Kepada [nama media], [nama narasumber] mengatakan bahwa ....
-6. Cantumkan sumber informasi secara wajar dan transparan di dalam artikel. Jangan membuat artikel seolah-olah merupakan hasil peliputan, wawancara, atau pengamatan langsung redaksi apabila informasi sepenuhnya berasal dari media lain.
-7. Gunakan bahasa Indonesia jurnalistik yang efektif, natural, ringkas, dan mudah dipahami. Hindari opini penulis, penghakiman, hiperbola, serta pengulangan informasi.
-8. Jangan menghilangkan informasi atau pernyataan penting hanya untuk membuat artikel berbeda. Jika terdapat informasi yang meragukan, tidak lengkap, atau saling bertentangan, abaikan dan jangan mengarang penjelasan.
-9. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
-10. Tambahkan teks "Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
+  const systemPrompt = `Bertindaklah sebagai editor bahasa. Tugasmu adalah menulis ulang artikel dengan ketentuan ketat:
+1. Pertahankan struktur kalimat langsungnya. Kamu hanya boleh merapikan typo jika ada, tetapi jangan ubah substansi ucapan maupun formatnya menjadi kalimat tidak langsung.
+2. Tetap sajikan sebagai kalimat tidak langsung, jangan diubah menjadi kutipan langsung baru.
+3. Boleh ditulis ulang (paraphrase) agar lebih menarik dan dibaca lebih lancar.
+4. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
+5. Gunakan bahasa Indonesia yang efektif, natural, ringkas, dan mudah dipahami. Hindari opini penulis, penghakiman, hiperbola, serta pengulangan informasi.
+6. Jangan menghilangkan informasi atau pernyataan penting hanya untuk membuat artikel berbeda. Jika terdapat informasi yang meragukan, tidak lengkap, atau saling bertentangan, abaikan dan jangan mengarang penjelasan.
+7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+8. Tambahkan teks "Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
 
 Berikan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
