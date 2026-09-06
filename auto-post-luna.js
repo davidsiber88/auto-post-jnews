@@ -218,13 +218,14 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Bertindaklah sebagai editor bahasa. Tugasmu adalah menulis ulang artikel dengan ketentuan ketat:
-1. Pertahankan struktur kalimat langsungnya. Kamu hanya boleh merapikan typo jika ada, tetapi jangan ubah substansi ucapan maupun formatnya menjadi kalimat tidak langsung.
-2. Tetap sajikan sebagai kalimat tidak langsung, jangan diubah menjadi kutipan langsung baru.
-3. Boleh ditulis ulang (paraphrase) agar lebih menarik dan dibaca lebih lancar.
+  const systemPrompt = `Tulis ulang artikel ini tanpa mengubah gaya penyampaian intinya dengan ketentuan ketat:
+1. Tulis ulang bagian narasi agar bebas plagiasi.
+2. JANGAN ubah kutipan/kalimat langsung yang ada di dalam tanda petik “...”.
+3. JANGAN ubah kalimat tidak langsung (misalnya: Ia mengatakan bahwa...) menjadi kutipan langsung.
 4. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
-5. Gunakan bahasa Indonesia yang efektif, natural, ringkas, dan mudah dipahami. Hindari opini penulis, penghakiman, hiperbola, serta pengulangan informasi.
-6. Jangan menghilangkan informasi atau pernyataan penting hanya untuk membuat artikel berbeda. Jika terdapat informasi yang meragukan, tidak lengkap, atau saling bertentangan, abaikan dan jangan mengarang penjelasan.
+5. Gunakan bahasa Indonesia yang efektif, natural, ringkas, dan mudah dipahami. Hindari opini, penghakiman, hiperbola, menyimpulkan, serta pengulangan informasi.
+6. Hilangkan informasi asal sumber artikel (misalnya: Berdasarkan informasi yang diolah dari Detik.com) dsb.
+6. Jangan menghilangkan informasi atau pernyataan penting hanya untuk membuat artikel berbeda. Jika terdapat informasi yang meragukan, tidak lengkap, atau saling bertentangan segera abaikan dan jangan mengarang penjelasan.
 7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
 8. Tambahkan teks "Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
 
