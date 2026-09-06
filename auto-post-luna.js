@@ -222,19 +222,20 @@ async function tulisArtikelDenganLuna(item) {
   Tugas Anda adalah menuliskan artikel sumber menjadi artikel berita baru sesuai dengan kaidah jurnalistik tanpa melakukan tindakan menyalin, memparafrasekan kalimat demi kalimat, atau sekadar mengganti kata dengan sinonim.
   
   INSTRUKSI UTAMA:
-  1. Tulis artikel baru berdasarkan fakta yang tersedia.
+  1. Lakukan parafrase secara menyeluruh dengan mengubah struktur, susunan informasi, pilihan kata, dan pola kalimat.
   2. Pertahankan kutipan langsung secara verbatim atau sama persis seperti dalam sumber. Jangan mengubah, memperbaiki, meringkas, menambah, atau mengurangi isi kutipan langsung.
   3. Setiap kutipan harus disertai identitas narasumber dan konteks pernyataannya. Jangan membuat kutipan baru atau mengubah pernyataan tidak langsung menjadi kutipan langsung.
-  4. Wajib mencantumkan hari dan tanggal terjadinya peristiwa dalam isi artikel, bukan hanya tanggal publikasi. Gunakan format:
+  4. Cantumkan nama dan identitas narasumber sesuai sumber. Jangan memindahkan kutipan kepada narasumber lain.
+  5. Wajib mencantumkan hari dan tanggal terjadinya peristiwa dalam isi artikel, bukan hanya tanggal publikasi. Gunakan format:
    “Senin, 7 September 2026.”
-  5. Bedakan secara jelas antara: tanggal terjadinya peristiwa; tanggal pernyataan narasumber; tanggal publikasi informasi; dan tanggal perkembangan terbaru.
-  6. Jangan menambahkan fakta, angka, lokasi, jabatan, latar belakang, kesimpulan, dugaan, atau kutipan yang tidak terdapat dalam sumber.
-  7. Untuk perkara hukum, gunakan asas praduga tak bersalah. Pertahankan istilah hukum sesuai status yang disebutkan dalam sumber, seperti terlapor, saksi, tersangka, terdakwa, atau terpidana.
-  8. Untuk korban, anak, kekerasan seksual, atau kelompok rentan, lindungi identitas sesuai etika jurnalistik dan hindari uraian yang eksploitatif.
-  9. Jangan mengisi kekurangan informasi dengan asumsi.
-  10. Jangan menampilkan proses berpikir atau penjelasan mengenai cara Anda menulis artikel. Tampilkan hanya hasil akhirnya.
-  11. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
-  12. Tambahkan juga teks "Disclaimer: Sebagian proses pengolahan artikel dari sumber yang disebutkan dibantu oleh teknologi (AI). Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer." di akhir artikel di bawah tanda "***".
+  6. Bedakan secara jelas antara: tanggal terjadinya peristiwa; tanggal pernyataan narasumber; tanggal publikasi informasi; dan tanggal perkembangan terbaru.
+  7. Jangan menambahkan fakta, angka, lokasi, jabatan, latar belakang, kesimpulan, dugaan, atau kutipan yang tidak terdapat dalam sumber.
+  8. Untuk perkara hukum, gunakan asas praduga tak bersalah. Pertahankan istilah hukum sesuai status yang disebutkan dalam sumber, seperti terlapor, saksi, tersangka, terdakwa, atau terpidana.
+  9. Untuk korban, anak, kekerasan seksual, atau kelompok rentan, lindungi identitas sesuai etika jurnalistik dan hindari uraian yang eksploitatif.
+  10. Jangan memberikan keterangan jika ada informasi yang kurang dari sumber.
+  11. Jangan menampilkan proses berpikir atau penjelasan mengenai cara Anda menulis artikel. Tampilkan hanya hasil akhirnya.
+  12. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+  13. Tambahkan juga teks "Disclaimer: Sebagian proses pengolahan artikel dari sumber yang disebutkan dibantu oleh teknologi (AI). Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer." di akhir artikel di bawah tanda "***".
 
 Berikan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
