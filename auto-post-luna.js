@@ -261,14 +261,15 @@ async function tulisArtikelDenganLuna(item) {
 Tugas Anda: menulis ULANG (bukan menyalin atau menerjemahkan kalimat demi kalimat) menjadi artikel berita baru yang orisinal, akurat, netral, jelas, dan sesuai kaidah jurnalistik.
 Aturan ketat yang WAJIB dipatuhi:
 1. Jangan menyalin atau sekadar mengganti sinonim dari artikel sumber. Pahami seluruh informasinya terlebih dahulu, kemudian tulis kembali dengan struktur, alur, pembukaan, transisi, dan susunan paragraf yang benar-benar baru.
-2. PERTAHANKAN seluruh kutipan LANGSUNG (perkataan narasumber dalam tanda kutip) PERSIS SAMA kata-katanya — jangan diparafrasekan, ditambah, dikurangi, atau diubah sama sekali. Ini termasuk aturan paling penting.
-3. PERTAHANKAN juga substansi kutipan TIDAK LANGSUNG (mis. "menurut ...", "... menjelaskan bahwa ...", "... menyatakan ..."). Redaksi kalimatnya boleh disusun ulang secukupnya, tapi seluruh informasi & atribusinya (siapa yang menyatakan apa) harus tetap ada, jangan sampai hilang atau dilebur jadi kalimat umum tanpa atribusi.
-4. Pertahankan detail konkret dari sumber: angka, nama, lokasi, waktu, jabatan, nama instansi. Detail semacam ini yang membuat berita terasa spesifik dan nyata — JANGAN diringkas jadi kalimat umum yang kehilangan detail tersebut, karena hasilnya akan terasa hambar dan tidak jurnalistik.
-5. Dasarkan tulisan HANYA pada informasi yang diberikan di bawah. Jangan menambahkan fakta, angka, data, atau kutipan yang tidak ada pada sumber.
-6. Jika informasi pada sumber kurang lengkap untuk mengisi salah satu unsur 5W+1H (siapa, apa, kapan, di mana, mengapa, bagaimana), tulis secukupnya sesuai yang tersedia — jangan mengarang atau menerka-nerka.
-7. Jaga nada netral dan objektif; hindari opini pribadi atau bahasa yang menghakimi/menyimpulkan sepihak.
-8. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
-9. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
+2. Buat lead baru yang merangkum inti peristiwa. Hindari menggunakan pola kalimat, urutan informasi, dan gaya pembukaan yang sama dengan artikel sumber.
+3. PERTAHANKAN seluruh kutipan LANGSUNG (perkataan narasumber dalam tanda kutip) PERSIS SAMA kata-katanya — jangan diparafrasekan, ditambah, dikurangi, atau diubah sama sekali. Ini termasuk aturan paling penting.
+4. PERTAHANKAN juga substansi kutipan TIDAK LANGSUNG (mis. "menurut ...", "... menjelaskan bahwa ...", "... menyatakan ..."). Redaksi kalimatnya boleh disusun ulang secukupnya, tapi seluruh informasi & atribusinya (siapa yang menyatakan apa) harus tetap ada, jangan sampai hilang atau dilebur jadi kalimat umum tanpa atribusi.
+5. Pertahankan detail konkret dari sumber: angka, nama, lokasi, waktu, jabatan, nama instansi. Detail semacam ini yang membuat berita terasa spesifik dan nyata — JANGAN diringkas jadi kalimat umum yang kehilangan detail tersebut, karena hasilnya akan terasa hambar dan tidak jurnalistik.
+6. Dasarkan tulisan HANYA pada informasi yang diberikan di bawah. Jangan menambahkan fakta, angka, data, atau kutipan yang tidak ada pada sumber.
+7. Jika informasi pada sumber kurang lengkap untuk mengisi salah satu unsur 5W+1H (siapa, apa, kapan, di mana, mengapa, bagaimana), tulis secukupnya sesuai yang tersedia — jangan mengarang atau menerka-nerka.
+8. Jaga nada netral dan objektif; hindari opini pribadi atau bahasa yang menghakimi/menyimpulkan sepihak.
+9. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+10. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
