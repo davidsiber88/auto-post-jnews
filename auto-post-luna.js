@@ -218,16 +218,14 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Tulis ulang artikel ini tanpa mengubah gaya penyampaian intinya dengan ketentuan ketat:
-1. Tulis ulang bagian narasi agar bebas plagiasi.
-2. JANGAN ubah kutipan/kalimat langsung yang ada di dalam tanda petik “...”.
-3. JANGAN ubah kalimat tidak langsung (misalnya: Ia mengatakan bahwa...) menjadi kutipan langsung.
-4. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
+  const systemPrompt = `Parafrase sumber tanpa mengubah gaya penyampaian intinya dan bebas dari plagiasi dengan ketentuan ketat:
+1. JANGAN ubah kutipan/kalimat langsung yang ada di dalam tanda petik “...”.
+2. JANGAN ubah kalimat tidak langsung (misalnya: Ia mengatakan bahwa...) menjadi kutipan langsung.
+3. Tidak boleh ada informasi yang ditambah, dikurangi, atau diubah maknanya.
 5. Gunakan bahasa Indonesia yang efektif, natural, ringkas, dan mudah dipahami. Hindari opini, penghakiman, hiperbola, menyimpulkan, serta pengulangan informasi.
 6. Hilangkan informasi asal sumber artikel (misalnya: Berdasarkan informasi yang diolah dari Detik.com) dsb.
-6. Jangan menghilangkan informasi atau pernyataan penting hanya untuk membuat artikel berbeda. Jika terdapat informasi yang meragukan, tidak lengkap, atau saling bertentangan segera abaikan dan jangan mengarang penjelasan.
 7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
-8. Tambahkan teks "Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
+8. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
 
 Berikan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
