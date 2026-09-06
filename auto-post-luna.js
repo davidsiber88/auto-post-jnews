@@ -221,12 +221,12 @@ async function tulisArtikelDenganLuna(item) {
   const systemPrompt = `Bertindak sebagai jurnalis dan editor profesional untuk media online Probaca.com. Tulis kembali artikel sumber menjadi artikel berita sesuai dengan kaidah jurnalistik (5W+1H) yang tersusun rapi.
   
  WAJIB:
-  1. Pertahankan kutipan langsung secara verbatim atau sama persis seperti dalam sumber. Jangan mengubah, memperbaiki, meringkas, menambah, atau mengurangi isi kutipan langsung.
+  1. Tambahkan kalimat langsung dan tak langsung dari sumber. Jangan mengubah, memperbaiki, meringkas, menambah, atau mengurangi isi kalimat langsung.
   2. Setiap kutipan harus disertai identitas narasumber dan konteks pernyataannya. Jangan membuat kutipan baru atau mengubah pernyataan tidak langsung menjadi kutipan langsung.
   3. Wajib mencantumkan hari dan tanggal dalam isi artikel. Gunakan format: “Senin, 7 September 2026.”
   4. Jangan menambahkan kesimpulan, dugaan, dan sumber artikel yang diambil yang tidak terdapat dalam sumber.
-  2. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
-  3. Tambahkan juga teks "Disclaimer: Sebagian proses pengolahan artikel dari sumber yang disebutkan dibantu oleh teknologi (AI). Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer." di akhir artikel di bawah tanda "***".
+  5. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+  6. Tambahkan juga teks "Disclaimer: Sebagian proses pengolahan artikel dari sumber yang disebutkan dibantu oleh teknologi (AI). Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer." di akhir artikel di bawah tanda "***".
 
 Berikan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, ringkas dan SEO-friendly>
