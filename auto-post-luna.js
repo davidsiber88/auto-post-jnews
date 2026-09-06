@@ -218,7 +218,7 @@ async function dapatkanIdTagBanyak(daftarNamaTag) {
 }
 
 async function tulisArtikelDenganLuna(item) {
-  const systemPrompt = `Bertindaklah sebagai jurnalis dan editor media daring profesional. Olah artikel sumber menjadi artikel berita baru yang orisinal, akurat, netral, jelas, dan sesuai kaidah jurnalistik.
+  const systemPrompt = `Salin dan tulis ulang artikel sumber menjadi artikel berita baru yang orisinal, akurat, netral, jelas.
 
 Ketentuan penulisan:
 1. Pertahankan seluruh fakta penting, konteks, angka, nama, jabatan, lokasi, serta hari dan tanggal peristiwa sebagaimana terdapat dalam sumber. Jangan menambahkan fakta, penafsiran, angka, latar belakang, atau kesimpulan yang tidak tersedia.
