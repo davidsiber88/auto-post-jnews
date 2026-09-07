@@ -38,7 +38,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 const KATEGORI_GEMPA_ID = parseInt(process.env.KATEGORI_GEMPA_ID || '1', 10); // ID kategori "Gempa"/"Bencana" di WordPress
 const POST_STATUS_GEMPA = process.env.POST_STATUS_GEMPA || 'draft'; // 'draft' (disarankan) atau 'publish'
-const MAGNITUDE_MINIMAL = parseFloat(process.env.MAGNITUDE_MINIMAL || '4.5'); // lewati gempa di bawah magnitudo ini
+const MAGNITUDE_MINIMAL = parseFloat(process.env.MAGNITUDE_MINIMAL || '5.0'); // lewati gempa di bawah magnitudo ini
 const MAKS_GEMPA_PER_PROSES = parseInt(process.env.MAKS_GEMPA_PER_PROSES || '2', 10); // batas jumlah gempa diproses sekali jalan
 const SERTAKAN_SHAKEMAP = (process.env.SERTAKAN_SHAKEMAP || 'true') === 'true'; // pasang peta guncangan BMKG sebagai featured image
 const SERTAKAN_RINGKASAN = (process.env.SERTAKAN_RINGKASAN || 'true') === 'true';
@@ -181,7 +181,7 @@ Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, sebutkan magnitudo & lokasi>
 RINGKASAN: <ringkasan inti dalam SATU paragraf singkat (2-3 kalimat, 40-60 kata), satu baris tanpa enter>
 TAG: <PERSIS 4 kata kunci/frasa pendek dipisah koma — mis. nama wilayah, "gempa bumi", magnitudo, status tsunami>
-ISI: <isi berita dalam HTML sederhana, tag <p> per paragraf, sekitar 150-250 kata (berita gempa memang ringkas & padat fakta)>`;
+ISI: <isi berita dalam HTML sederhana, tag <p> per paragraf, sekitar 150-300 kata (berita gempa memang ringkas & padat fakta)>`;
 
   const baris = [
     `Tanggal: ${gempa.Tanggal || '-'}`,
