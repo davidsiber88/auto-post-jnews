@@ -59,6 +59,7 @@ const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/', selector: '.entry-content' },
   { name: 'Pronusantara.com', url: 'https://rss.promediateknologi.id/feed/social?apikey=71c4f47ad3004225e94879c772a703ef41204014', selector: '.entry-content' },
   { name: 'Theverge', url: 'https://www.theverge.com/rss/index.xml', selector: '.entry-content' },
+  { name: 'GSMArena', url: 'https://www.gsmarena.com/rss-news-reviews.php3', selector: '.entry-content' },
   { name: 'Detik.com', url: 'https://news.detik.com/berita/rss', selector: '.entry-content' },
 ];
 
