@@ -1,1 +1,49 @@
+name: Auto Post Gempa BMKG
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'   # tiap 15 menit — sesuaikan, lihat catatan kuota di panduan Bagian 8.7
+  workflow_dispatch: {}       # supaya bisa dijalankan manual dari tab Actions
+
+permissions:
+  contents: write             # supaya bisa commit balik posted-gempa-log.json
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Jalankan skrip auto-post gempa
+        run: node auto-post-gempa.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          KATEGORI_GEMPA_ID: ${{ secrets.KATEGORI_GEMPA_ID }}
+          POST_STATUS_GEMPA: publish
+          MAGNITUDE_MINIMAL: '5.0'
+          MAKS_GEMPA_PER_PROSES: '1'
+          SERTAKAN_SHAKEMAP: 'true'
+          SERTAKAN_RINGKASAN: 'false'
+          SERTAKAN_TAG_OTOMATIS: 'true'
+
+      - name: Simpan riwayat posting gempa
+        run: |
+          git config user.name "auto-post-bot"
+          git config user.email "auto-post-bot@users.noreply.github.com"
+          git add posted-gempa-log.json
+          git diff --staged --quiet || git commit -m "Update posted-gempa-log.json"
+          git push
 
