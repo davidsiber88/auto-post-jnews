@@ -33,7 +33,7 @@ jobs:
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
           KATEGORI_GEMPA_ID: ${{ secrets.KATEGORI_GEMPA_ID }}
           POST_STATUS_GEMPA: publish
-          MAGNITUDE_MINIMAL: '5.0'
+          MAGNITUDE_MINIMAL: '4.5'
           MAKS_GEMPA_PER_PROSES: '1'
           SERTAKAN_SHAKEMAP: 'true'
           SERTAKAN_RINGKASAN: 'false'
