@@ -164,7 +164,7 @@ Aturan ketat yang WAJIB dipatuhi:
 1. Gunakan HANYA data yang diberikan. JANGAN menambahkan informasi korban
    jiwa, kerusakan bangunan, atau detail apa pun yang tidak ada di data —
    data yang diberikan TIDAK memuat info semacam itu, jadi jangan mengarang.
-2. Sebutkan status POTENSI TSUNAMI secara jelas dan menonjol, PERSIS sesuai
+2. Sebutkan status POTENSI secara jelas dan menonjol, PERSIS sesuai
    data yang diberikan — jangan diperlemah atau diperkuat maknanya.
 3. Kalau ada data wilayah yang merasakan guncangan (dirasakan), sebutkan.
 4. Setelah memaparkan fakta gempa, TUTUP artikel dengan SATU paragraf
@@ -194,6 +194,7 @@ ISI: <isi berita dalam HTML sederhana, tag <p> per paragraf, sekitar 150-300 kat
     `Lokasi/Wilayah: ${gempa.Wilayah || '-'}`,
     `Koordinat: ${gempa.Coordinates || '-'}`,
     `Potensi: ${gempa.Potensi || '-'}`,
+    `Dirasakan: ${gempa.Dirasakan || '-'}`,
   ];
   if (gempa.Dirasakan) baris.push(`Dirasakan di: ${gempa.Dirasakan}`);
 
