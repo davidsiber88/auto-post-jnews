@@ -264,7 +264,7 @@ Tugas Anda: menulis ULANG (bukan menyalin atau menerjemahkan kalimat demi kalima
 Aturan ketat yang WAJIB dipatuhi:
 1. Jangan menyalin atau sekadar mengganti sinonim dari artikel sumber. Pahami seluruh informasinya terlebih dahulu, kemudian tulis kembali dengan struktur, alur, pembukaan, transisi, dan susunan paragraf yang benar-benar baru.
 2. Buat lead baru yang merangkum inti peristiwa. Hindari menggunakan pola kalimat, urutan informasi, dan gaya pembukaan yang sama dengan artikel sumber.
-3. PERTAHANKAN seluruh kutipan LANGSUNG (perkataan narasumber dalam tanda kutip) PERSIS SAMA kata-katanya — jangan diparafrasekan, ditambah, dikurangi, atau diubah sama sekali. Ini termasuk aturan paling penting.
+3. PERTAHANKAN seluruh kutipan LANGSUNG (perkataan narasumber dalam tanda kutip) PERSIS SAMA kata-katanya — jangan diparafrasekan, ditambah, dikurangi, atau diubah sama sekali. Kecuali jika berbahasa asing harus diterjemahkan ke dalam Bahasa Indonesia. Ini termasuk aturan paling penting.
 4. PERTAHANKAN juga substansi kutipan TIDAK LANGSUNG (mis. "menurut ...", "... menjelaskan bahwa ...", "... menyatakan ..."). Redaksi kalimatnya boleh disusun ulang secukupnya, tapi seluruh informasi & atribusinya (siapa yang menyatakan apa) harus tetap ada, jangan sampai hilang atau dilebur jadi kalimat umum tanpa atribusi.
 5. Pertahankan detail konkret dari sumber: angka, nama, lokasi, waktu, jabatan, nama instansi. Detail semacam ini yang membuat berita terasa spesifik dan nyata — JANGAN diringkas jadi kalimat umum yang kehilangan detail tersebut, karena hasilnya akan terasa hambar dan tidak jurnalistik.
 6. Dasarkan tulisan HANYA pada informasi yang diberikan di bawah. Jangan menambahkan fakta, angka, data, atau kutipan yang tidak ada pada sumber.
