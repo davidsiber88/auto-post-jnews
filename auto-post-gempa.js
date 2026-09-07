@@ -44,7 +44,7 @@ const SERTAKAN_SHAKEMAP = (process.env.SERTAKAN_SHAKEMAP || 'true') === 'true'; 
 const SERTAKAN_RINGKASAN = (process.env.SERTAKAN_RINGKASAN || 'true') === 'true';
 const SERTAKAN_TAG_OTOMATIS = (process.env.SERTAKAN_TAG_OTOMATIS || 'true') === 'true';
 
-const URL_GEMPA_TERKINI = 'https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json'; // 15 gempa M5.0+ terbaru, resmi BMKG
+const URL_GEMPA_TERKINI = 'https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json'; // 15 gempa M5.0+ terbaru, resmi BMKG
 const LOG_FILE = './posted-gempa-log.json'; // dedup terpisah dari posted-log.json milik auto-post-luna.js
 // -----------------------------------
 
