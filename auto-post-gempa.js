@@ -176,6 +176,9 @@ Aturan ketat yang WAJIB dipatuhi:
    ada kalimat kutipan di data yang diberikan (umumnya tidak ada — data
    di bawah berupa angka/fakta terstruktur saja).
 6. Jaga nada tenang dan faktual, hindari bahasa yang memicu kepanikan.
+7. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+8. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
+
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul berita, maksimal 12 kata, sebutkan magnitudo & lokasi>
