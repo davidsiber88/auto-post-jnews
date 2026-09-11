@@ -55,7 +55,7 @@ const SERTAKAN_RINGKASAN = (process.env.SERTAKAN_RINGKASAN || 'true') === 'true'
 const SERTAKAN_TAG_OTOMATIS = (process.env.SERTAKAN_TAG_OTOMATIS || 'true') === 'true';
 
 // Field "selector" OPSIONAL: CSS selector kontainer isi artikel di halaman
-// sumber. Kalau dikosongkan, skrip mencoba selector umum lalu fallback ke
+// . Kalau dikosongkan, skrip mencoba selector umum lalu fallback ke
 // gabungan semua <p>. Cara menemukannya sama seperti panduan Bagian 5A.4.
 const RSS_SOURCES = [
   { name: 'ScienceDaily', url: 'https://www.sciencedaily.com/rss/all.xml', selector: '#text' },
@@ -336,7 +336,7 @@ async function postingKeWordPress({ judul, isi, sourceLink, sourceName, foto, ri
 </div>\n`;
   }
   kontenLengkap += isi;
-  kontenLengkap += `\n<p><em>Sumber: <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
+  kontenLengkap += `\n<p><em>Diolah dari sumber <a href="${sourceLink}" target="_blank" rel="noopener nofollow">${sourceName}</a></em></p>`;
 
   const payload = {
     title: judul,
