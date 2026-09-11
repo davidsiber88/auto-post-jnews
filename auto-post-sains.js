@@ -247,6 +247,8 @@ Prinsip gaya penulisan yang WAJIB dipatuhi:
 9. Kalau materi sumber menyebut nama peneliti/institusi/jurnal, sebutkan
    juga di artikel Anda (dengan gaya santai, bukan sitasi akademis kaku)
    supaya tetap kredibel meski dibawakan santai.
+10. Tambahkan teks "PROBACA.ID -" di awal artikel dan tutup dengan tanda "***" di akhir artikel.
+11. Tambahkan teks "DISCLAIMER: Sebagian proses pengolahan artikel ini dibantu oleh teknologi AI. Pembaca disarankan memverifikasi kembali data dan informasi melalui sumber resmi atau sumber primer" di akhir artikel di bawah teks "***".
 
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul yang memancing rasa penasaran, gaya menarik tapi TIDAK clickbait/menyesatkan, maksimal 12 kata>
