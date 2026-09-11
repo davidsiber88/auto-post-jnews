@@ -56,8 +56,6 @@ const AMBIL_ARTIKEL_LENGKAP = (process.env.AMBIL_ARTIKEL_LENGKAP || 'true') === 
 const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/', selector: '.entry-content' },
   { name: 'Antaranews - Rilis Pers', url: 'https://www.antaranews.com/rss/rilis-pers.xml', selector: '.entry-content' },
-  { name: 'Theverge', url: 'https://www.theverge.com/rss/index.xml', selector: '.entry-content' },
-  { name: 'GSMArena', url: 'https://www.gsmarena.com/rss-news-reviews.php3', selector: '.entry-content' },
   { name: 'Detik.com', url: 'https://news.detik.com/berita/rss', selector: '.entry-content' },
 ];
 
