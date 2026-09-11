@@ -59,7 +59,7 @@ const SERTAKAN_TAG_OTOMATIS = (process.env.SERTAKAN_TAG_OTOMATIS || 'true') === 
 // gabungan semua <p>. Cara menemukannya sama seperti panduan Bagian 5A.4.
 const RSS_SOURCES = [
   { name: 'ScienceDaily', url: 'https://www.sciencedaily.com/rss/all.xml', selector: '#text' },
-  { name: 'NASA', url: 'https://www.nasa.gov/rss/dyn/breaking_news.rss' },
+  { name: 'Theverge', url: 'https://www.theverge.com/rss/science/index.xml', selector: '.entry-content' },
 ];
 
 const LOG_FILE = './posted-sains-log.json'; // dedup terpisah dari modul lain
