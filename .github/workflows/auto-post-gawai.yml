@@ -31,9 +31,9 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-          KATEGORI_SAINS_ID: ${{ secrets.KATEGORI_SAINS_ID }}
-          POST_STATUS_SAINS: publish
-          MAKS_SAINS_PER_PROSES: '1'
+          KATEGORI_GAWAI_ID: ${{ secrets.KATEGORI_SAINS_ID }}
+          POST_STATUS_GAWAI: publish
+          MAKS_GAWAI_PER_PROSES: '1'
           AMBIL_ARTIKEL_LENGKAP: 'true'
           SERTAKAN_FOTO: 'true'
           SISIPKAN_FOTO_DI_ARTIKEL: 'false'
