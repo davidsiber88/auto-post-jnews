@@ -278,7 +278,7 @@ Prinsip gaya penulisan yang WAJIB dipatuhi:
 Keluarkan jawaban PERSIS dalam format berikut, tanpa teks tambahan lain:
 JUDUL: <judul yang memancing rasa penasaran, gaya menarik tapi TIDAK clickbait/menyesatkan, maksimal 12 kata>
 RINGKASAN: <SATU kalimat penggoda/hook (bukan ringkasan formal), akan tampil sebagai teaser di awal artikel, satu baris tanpa enter>
-TAG: <PERSIS 4 kata kunci/frasa pendek dipisah koma, mewakili topik utama>
+TAG: <PERSIS 4 kata kunci/frasa pendek dipisah koma, mewakili topik utama — mis. isu, "ilmu pengetahuan", nama orang, "sains">>
 ISI: <isi artikel dalam HTML sederhana, tag <p> per paragraf, sekitar 300-500 kata, mengikuti SEMUA prinsip gaya di atas>`;
 
   let materiSumber = null;
