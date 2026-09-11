@@ -218,7 +218,7 @@ async function unggahFotoDenganKredit(urlGambar, sourceName) {
       maxBodyLength: Infinity,
     });
     const mediaId = unggah.data.id;
-    const teksKredit = `Foto: ${sourceName}`;
+    const teksKredit = `Sumber ${sourceName}`;
     await axios.post(
       `${WP_URL}/wp-json/wp/v2/media/${mediaId}`,
       { caption: teksKredit, alt_text: teksKredit, description: teksKredit },
@@ -289,7 +289,7 @@ ISI: <isi artikel dalam HTML sederhana, tag <p> per paragraf, sekitar 300-500 ka
     materiSumber = item.content || item.contentSnippet || '(tidak ada ringkasan tersedia)';
   }
 
-  const userPrompt = `Sumber: ${item.sourceName}
+  const userPrompt = `Dioleh dari sumber ${item.sourceName}
 Judul asli: ${item.title}
 Materi sumber:
 ${materiSumber}
