@@ -239,7 +239,7 @@ async function postingKeWordPress({ judul, isi, ringkasan, tagIds, foto }) {
   }
 
   kontenLengkap += isi;
-  kontenLengkap += `\n<p><em>Sumber: BMKG (Badan Meteorologi, Klimatologi, dan Geofisika)</em></p>`;
+  kontenLengkap += `\n<p><em>Diolah dari data BMKG (Badan Meteorologi, Klimatologi, dan Geofisika)</em></p>`;
 
   const payload = {
     title: judul,
