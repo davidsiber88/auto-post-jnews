@@ -31,7 +31,7 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-          KATEGORI_GAWAI_ID: ${{ secrets.KATEGORI_SAINS_ID }}
+          KATEGORI_GAWAI_ID: ${{ secrets.KATEGORI_GAWAI_ID }}
           POST_STATUS_GAWAI: publish
           MAKS_GAWAI_PER_PROSES: '1'
           AMBIL_ARTIKEL_LENGKAP: 'true'
