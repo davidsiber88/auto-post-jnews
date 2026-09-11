@@ -371,7 +371,10 @@ async function main() {
 
       let foto = null;
       if (SERTAKAN_FOTO) {
-        const urlGambar = ekstrakUrlGambar(item);
+        let urlGambar = ekstrakUrlGambar(item);
+        if (!urlGambar) {
+          urlGambar = await ambilOgImage(item.link); // fallback: og:image dari halaman artikel asli
+        }
         if (urlGambar) foto = await unggahFotoDenganKredit(urlGambar, item.sourceName);
       }
 
