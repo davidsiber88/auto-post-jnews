@@ -120,6 +120,31 @@ function ekstrakUrlGambar(item) {
   return match ? match[1] : null;
 }
 
+/**
+ * FALLBACK kalau ekstrakUrlGambar() di atas tidak menemukan apa-apa —
+ * ini terjadi kalau feed RSS-nya memang sama sekali tidak menyertakan
+ * gambar (mis. ScienceDaily). Solusinya: buka halaman artikel ASLI dan
+ * baca tag <meta property="og:image">, yang hampir selalu ada di situs
+ * modern (dipakai untuk pratinjau saat dibagikan ke media sosial).
+ */
+async function ambilOgImage(url) {
+  try {
+    const res = await axios.get(url, {
+      timeout: 15000,
+      headers: { 'User-Agent': 'Mozilla/5.0 (auto-post-sains bot)' },
+    });
+    const $ = cheerio.load(res.data);
+    const ogImage =
+      $('meta[property="og:image"]').attr('content') ||
+      $('meta[name="og:image"]').attr('content') ||
+      $('meta[name="twitter:image"]').attr('content');
+    return ogImage || null;
+  } catch (err) {
+    console.warn(`  Gagal mengambil og:image dari ${url}: ${err.message}`);
+    return null;
+  }
+}
+
 async function ambilTeksArtikelLengkap(url, selectorKustom) {
   try {
     const res = await axios.get(url, {
