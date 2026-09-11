@@ -1,0 +1,49 @@
+name: Auto Post Sains Populer
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'    # tiap 2 jam — konten evergreen, tidak perlu sesering berita/gempa
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Jalankan skrip auto-post sains
+        run: node auto-post-sains.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          KATEGORI_SAINS_ID: ${{ secrets.KATEGORI_SAINS_ID }}
+          POST_STATUS_SAINS: publish
+          MAKS_SAINS_PER_PROSES: '1'
+          AMBIL_ARTIKEL_LENGKAP: 'true'
+          SERTAKAN_FOTO: 'true'
+          SISIPKAN_FOTO_DI_ARTIKEL: 'false'
+          SERTAKAN_RINGKASAN: 'false'
+          SERTAKAN_TAG_OTOMATIS: 'true'
+
+      - name: Simpan riwayat posting sains
+        run: |
+          git config user.name "auto-post-bot"
+          git config user.email "auto-post-bot@users.noreply.github.com"
+          git add posted-sains-log.json
+          git diff --staged --quiet || git commit -m "Update posted-sains-log.json"
+          git push
