@@ -2,7 +2,7 @@ name: Auto Post Sains Populer
 
 on:
   schedule:
-    - cron: '0 */2 * * *'    # tiap 2 jam — konten evergreen, tidak perlu sesering berita/gempa
+    - cron: '0 */6 * * *'    # tiap 6 jam — konten evergreen, tidak perlu sesering berita/gempa
   workflow_dispatch: {}
 
 permissions:
