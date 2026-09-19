@@ -57,6 +57,7 @@ const RSS_SOURCES = [
   { name: 'Setkab RI', url: 'https://setkab.go.id/feed/', selector: '.entry-content' },
   { name: 'Antaranews - Rilis Pers', url: 'https://www.antaranews.com/rss/rilis-pers.xml', selector: '.entry-content' },
   { name: 'Detik.com', url: 'https://news.detik.com/berita/rss', selector: '.entry-content' },
+  { name: 'https://rss.app/feeds/dQQ6ooxudu7gPby2.xml', selector: '.entry-content' },
 ];
 
 const LOG_FILE = './posted-log.json'; // penyimpanan sederhana anti-duplikat
